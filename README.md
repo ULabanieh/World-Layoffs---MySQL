@@ -42,7 +42,8 @@ PARTITION BY company, industry, total_laid_off, percentage_laid_off, `date`) AS 
 FROM layoffs_staging;
 ```
 
-![[1446-02-20 12_34_00-MySQL Workbench.png]]
+![1446-02-20 12_34_00-MySQL Workbench](https://github.com/user-attachments/assets/a9a92eda-0ab1-480c-9b75-88e88ec476da)
+
 
 ```SQL
 WITH duplicate_cte AS
@@ -57,7 +58,8 @@ FROM duplicate_cte
 WHERE row_num > 1;
 ```
 
-![[1446-02-20 12_37_22-MySQL Workbench.png]]
+![1446-02-20 12_37_22-MySQL Workbench](https://github.com/user-attachments/assets/18a2afad-160e-4f9a-9988-303d6481cb05)
+
 
 Since update statements such as`DELETE` cannot be applied to CTEs, I will create a new staging table and run the following code:
 
@@ -97,7 +99,8 @@ FROM layoffs_staging2
 WHERE row_num > 1;
 ```
 
-![[1446-02-20 12_42_21-MySQL Workbench.png]]
+![1446-02-20 12_42_21-MySQL Workbench](https://github.com/user-attachments/assets/5a1679f1-5e01-4c5f-a8c9-a3d80c8c6221)
+
 
 ## Standardize Data
 ---
@@ -107,7 +110,8 @@ SELECT company, TRIM(company)
 FROM layoffs_staging2;
 ```
 
-![[1446-02-20 12_43_31-MySQL Workbench.png]]
+![1446-02-20 12_43_31-MySQL Workbench](https://github.com/user-attachments/assets/044c5a90-a772-4576-ba4a-53b16fafbac0)
+
 
 ```SQL
 UPDATE layoffs_staging2
@@ -121,7 +125,8 @@ FROM layoffs_staging2
 ORDER BY 1;
 ```
 
-![[1446-02-20 12_46_22-MySQL Workbench.png]]
+![1446-02-20 12_46_22-MySQL Workbench](https://github.com/user-attachments/assets/1663c2c5-1b8c-4c27-b872-891562174f49)
+
 
 ```sql
 SELECT * 
@@ -129,7 +134,8 @@ FROM layoffs_staging2
 WHERE industry LIKE 'Crypto%';
 ```
 
-![[1446-02-20 12_45_50-MySQL Workbench.png]]
+![1446-02-20 12_45_50-MySQL Workbench](https://github.com/user-attachments/assets/f2776d2a-d987-4c53-9d43-6930a8b0a2b7)
+
 
 
 ```SQL
@@ -147,7 +153,8 @@ FROM layoffs_staging2
 WHERE country LIKE 'United States%';
 ```
 
-![[1446-02-20 12_48_28-MySQL Workbench.png]]
+![1446-02-20 12_48_28-MySQL Workbench](https://github.com/user-attachments/assets/8361b10f-33c0-4e76-ac1a-dcc28b05de34)
+
 
 ```SQL
 SELECT DISTINCT country, TRIM(TRAILING '.' FROM country)
@@ -156,7 +163,8 @@ ORDER BY 1;
 ```
 
 
-![[1446-02-20 12_48_57-MySQL Workbench.png]]
+![1446-02-20 12_48_57-MySQL Workbench](https://github.com/user-attachments/assets/523b0cd0-0c5e-4d18-9961-0b3558ff30c2)
+
 
 
 ```SQL
@@ -173,7 +181,8 @@ STR_TO_DATE(`date`, '%m/%d/%Y')
 FROM layoffs_staging2;
 ```
 
-![[1446-02-20 12_50_01-MySQL Workbench.png]]
+![1446-02-20 12_50_01-MySQL Workbench](https://github.com/user-attachments/assets/28bc7aa6-9ecf-4218-879f-dd5c4e68cf64)
+
 
 ```SQL
 UPDATE layoffs_staging2
@@ -196,7 +205,8 @@ WHERE industry IS NULL
 OR industry = '';
 ```
 
-![[1446-02-20 13_19_25-MySQL Workbench.png]]
+![1446-02-20 13_19_25-MySQL Workbench](https://github.com/user-attachments/assets/5a8ef399-5586-49e8-b268-70698ab91319)
+
 
 ```SQL
  UPDATE layoffs_staging2
@@ -216,7 +226,8 @@ WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 ```
 
-![[1446-02-20 13_21_27-MySQL Workbench.png]]
+![1446-02-20 13_21_27-MySQL Workbench](https://github.com/user-attachments/assets/d59b4128-994c-41a3-81a6-e718363b6c5b)
+
 
 ```SQL
 DELETE
@@ -243,7 +254,9 @@ SELECT MAX(total_laid_off), MAX(percentage_laid_off)
 FROM layoffs_staging2;
 ```
 
-![[1446-02-20 13_25_13-MySQL Workbench.png]]
+![1446-02-20 13_25_13-MySQL Workbench](https://github.com/user-attachments/assets/357710d7-0456-47c8-ba92-7570fb3c8142)
+
+
 ## Companies that had 100% of layoffs
 ---
 ```SQL
@@ -254,7 +267,9 @@ ORDER BY total_laid_off DESC;
 ```
 
 
-![[1446-02-20 13_26_57-MySQL Workbench.png]]
+![1446-02-20 13_26_57-MySQL Workbench](https://github.com/user-attachments/assets/e985d51c-b8e6-4859-91af-fa65ab708eb6)
+
+
 ## Layoffs by company
 ---
 ```SQL
@@ -265,7 +280,9 @@ ORDER BY 2 DESC;
 ```
 
 
-![[1446-02-20 13_27_53-MySQL Workbench.png]]
+![1446-02-20 13_27_53-MySQL Workbench](https://github.com/user-attachments/assets/b0d90792-8754-4364-a238-be2beb1976b0)
+
+
 ## Layoffs by industry
 ---
 ```SQL
@@ -275,7 +292,10 @@ GROUP BY industry
 ORDER BY 2 DESC;
 ```
 
-![[1446-02-20 13_30_08-MySQL Workbench.png]]
+
+![1446-02-20 13_30_08-MySQL Workbench](https://github.com/user-attachments/assets/2797490e-5a25-45c0-a566-cb8079b6fd03)
+
+
 ## Layoffs by country
 ---
 ```sql
@@ -285,8 +305,8 @@ GROUP BY country
 ORDER BY 2 DESC;
 ```
 
+![1446-02-20 13_30_34-MySQL Workbench](https://github.com/user-attachments/assets/8644df43-b11d-44af-8d30-508413e7986f)
 
-![[1446-02-20 13_30_34-MySQL Workbench.png]]
 
 ## Layoffs and rolling total by month
 ---
@@ -302,7 +322,8 @@ SELECT `month`, total_off, SUM(total_off) OVER(ORDER BY `month`) AS rolling_tota
 FROM Rolling_Total;
 ```
 
-![[1446-02-20 13_31_17-MySQL Workbench.png]]
+![1446-02-20 13_31_17-MySQL Workbench](https://github.com/user-attachments/assets/df15ee3b-175b-43c7-bfb0-8c8988d3d2fd)
+
 
 ## Top companies by total layoffs per year
 ---
@@ -322,4 +343,4 @@ FROM Company_Year_Rank
 WHERE ranking <= 5;
 ```
 
-![[1446-02-20 13_31_43-MySQL Workbench.png]]
+![1446-02-20 13_31_43-MySQL Workbench](https://github.com/user-attachments/assets/ff9d2898-1edf-436d-88c5-e0f8249f1fa6)
