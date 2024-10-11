@@ -1,4 +1,4 @@
-# Project Overview
+# 🏢 Project Overview
 ---
 This is a Data Cleaning and Data Exploration project on a dataset about layoffs in the tech industry from the start of the coronavirus pandemic in 2020 until March 2023 using MySQL. The project is comprised of 2 main parts: Data Cleaning and Exploratory Data Analysis. 
 
